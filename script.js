@@ -353,7 +353,6 @@ function navigateTo(section) {
     
     // Debug logging
     console.log('navigateTo called with section:', section);
-    console.log('Current event target:', event?.currentTarget);
     
     // Handle navigation to specific pages
     if (section === 'create-worklist') {
@@ -368,8 +367,8 @@ function navigateTo(section) {
     }
     
     // Simulate navigation with visual feedback for other sections
-    const clickedItem = event.currentTarget;
-    if (clickedItem) {
+    if (typeof event !== 'undefined' && event && event.currentTarget) {
+        const clickedItem = event.currentTarget;
         clickedItem.style.transform = 'scale(0.95)';
         
         setTimeout(() => {
@@ -378,7 +377,8 @@ function navigateTo(section) {
             alert(`${t.navigating} ${section}\n\n${t.willImplement} ${sectionTitle}.`);
         }, 150);
     } else {
-        alert(`${t.navigating} ${section}`);
+        // Fallback for when there's no event (like console calls)
+        alert(`${t.navigating} ${section}\n\n${t.willImplement} ${section}.`);
     }
 }
 
