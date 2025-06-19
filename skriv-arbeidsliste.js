@@ -388,10 +388,269 @@ Empty: ${formData.isEmpty ? 'Yes' : 'No'}`;
     ),
 
     // Main Form
-    !showWorkLists && React.createElement('div', null,
-      // Form fields here...
-      // (The form rendering code would continue here with all the form fields)
-      
+    !showWorkLists && React.createElement('div', { className: 'space-y-4' },
+      // Project and Date
+      React.createElement('div', { className: 'grid grid-cols-2 gap-2' },
+        React.createElement('div', { className: 'form-group' },
+          React.createElement('label', null, 'Project'),
+          React.createElement('select', {
+            value: formData.project,
+            onChange: (e) => handleInputChange('project', e.target.value),
+            className: 'form-control'
+          },
+            React.createElement('option', { value: '' }, 'Select a project'),
+            database.projects.map(project => 
+              React.createElement('option', { key: project, value: project }, project)
+            )
+          )
+        ),
+        React.createElement('div', { className: 'form-group' },
+          React.createElement('label', null, 'Date'),
+          React.createElement('input', {
+            type: 'date',
+            value: formData.date,
+            onChange: (e) => handleInputChange('date', e.target.value),
+            className: 'form-control'
+          })
+        )
+      ),
+
+      // Floor
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Floor'),
+        React.createElement('div', { className: 'toggle-group' },
+          database.floors.map(floor => 
+            React.createElement('button', {
+              key: floor,
+              onClick: () => handleInputChange('floor', floor),
+              className: `toggle-btn ${formData.floor === floor ? 'active' : ''}`
+            }, floor)
+          )
+        )
+      ),
+
+      // Location
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Location'),
+        React.createElement('div', { className: 'grid grid-cols-2 gap-2' },
+          React.createElement('input', {
+            type: 'text',
+            value: formData.location1,
+            onChange: (e) => handleInputChange('location1', e.target.value),
+            placeholder: 'Room 1',
+            className: 'form-control'
+          }),
+          React.createElement('input', {
+            type: 'text',
+            value: formData.location2,
+            onChange: (e) => handleInputChange('location2', e.target.value),
+            placeholder: 'Room 2',
+            className: 'form-control'
+          })
+        )
+      ),
+
+      // Amount of Holes
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Amount of Holes'),
+        React.createElement('div', { className: 'flex gap-1 flex-wrap' },
+          ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].map(count => 
+            React.createElement('button', {
+              key: count,
+              onClick: () => handleHoleCountChange(count),
+              className: `toggle-btn ${formData.holeCount === count ? 'active' : ''}`
+            }, count)
+          ),
+          React.createElement('input', {
+            type: 'number',
+            value: formData.holeCountOther,
+            onChange: (e) => {
+              setFormData(prev => ({
+                ...prev,
+                holeCount: '',
+                holeCountOther: e.target.value
+              }));
+            },
+            placeholder: 'Other',
+            className: 'form-control',
+            style: { width: '80px' }
+          })
+        )
+      ),
+
+      // Hole Type
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Hole Type'),
+        React.createElement('div', { className: 'flex gap-2' },
+          React.createElement('button', {
+            onClick: () => handleInputChange('holeType', 'round'),
+            className: `toggle-btn ${formData.holeType === 'round' ? 'active' : ''}`
+          }, 'Round'),
+          React.createElement('button', {
+            onClick: () => handleInputChange('holeType', 'square'),
+            className: `toggle-btn ${formData.holeType === 'square' ? 'active' : ''}`
+          }, 'Square')
+        )
+      ),
+
+      // Hole Size
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Hole Size'),
+        formData.holeType === 'round' 
+          ? React.createElement('select', {
+              value: formData.holeSize.diameter,
+              onChange: (e) => handleHoleSizeChange('diameter', e.target.value),
+              className: 'form-control'
+            },
+              React.createElement('option', { value: '' }, 'Select diameter'),
+              database.holeDiameters.map(diameter => 
+                React.createElement('option', { key: diameter, value: diameter }, `${diameter}mm`)
+              )
+            )
+          : React.createElement('div', { className: 'grid grid-cols-2 gap-2' },
+              React.createElement('input', {
+                type: 'text',
+                value: formData.holeSize.width,
+                onChange: (e) => handleHoleSizeChange('width', e.target.value),
+                placeholder: 'Width',
+                className: 'form-control'
+              }),
+              React.createElement('input', {
+                type: 'text',
+                value: formData.holeSize.height,
+                onChange: (e) => handleHoleSizeChange('height', e.target.value),
+                placeholder: 'Height',
+                className: 'form-control'
+              })
+            )
+      ),
+
+      // W/C/F
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'W/C/F'),
+        React.createElement('div', { className: 'flex gap-2' },
+          ['Wall', 'Ceiling', 'Floor'].map(type => 
+            React.createElement('button', {
+              key: type,
+              onClick: () => handleInputChange('wcf', type),
+              className: `toggle-btn ${formData.wcf === type ? 'active' : ''}`
+            }, type)
+          )
+        )
+      ),
+
+      // Products
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Products'),
+        React.createElement('div', { className: 'flex gap-2 mb-2' },
+          React.createElement('button', {
+            onClick: () => setShowProductSelector(!showProductSelector),
+            className: 'btn btn-success flex-1'
+          }, '➕ Add'),
+          React.createElement('button', {
+            onClick: resetProducts,
+            className: 'btn btn-secondary flex-1'
+          }, '🔄 Reset')
+        ),
+        showProductSelector && React.createElement('div', null,
+          React.createElement('div', {
+            className: 'modal-backdrop',
+            onClick: () => setShowProductSelector(false)
+          }),
+          React.createElement('div', { className: 'modal' },
+            React.createElement('div', { className: 'flex-between mb-3' },
+              React.createElement('p', { className: 'font-medium' }, 'Select Products'),
+              React.createElement('button', {
+                onClick: () => setShowProductSelector(false),
+                className: 'btn btn-icon'
+              }, '✕')
+            ),
+            React.createElement('div', { className: 'grid grid-cols-2 gap-2 mb-3' },
+              database.products.map(product => 
+                React.createElement('label', {
+                  key: product,
+                  className: 'flex items-start gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer'
+                },
+                  React.createElement('input', {
+                    type: 'checkbox',
+                    checked: formData.products.includes(product),
+                    onChange: () => toggleProduct(product),
+                    className: 'checkbox'
+                  }),
+                  React.createElement('span', { className: 'text-sm' }, product)
+                )
+              )
+            ),
+            React.createElement('button', {
+              onClick: () => setShowProductSelector(false),
+              className: 'btn btn-primary w-full'
+            }, 'Apply')
+          )
+        ),
+        formData.products.length > 0 && React.createElement('div', { className: 'flex flex-wrap gap-1' },
+          formData.products.map((product, idx) => 
+            React.createElement('span', { key: idx, className: 'tag' }, product)
+          )
+        )
+      ),
+
+      // Fire Resistance
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Fire Resistance'),
+        React.createElement('div', { className: 'toggle-group' },
+          database.fireResistance.map(resistance => 
+            React.createElement('button', {
+              key: resistance,
+              onClick: () => handleInputChange('fireResistance', resistance),
+              className: `toggle-btn ${formData.fireResistance === resistance ? 'active' : ''}`
+            }, resistance)
+          )
+        )
+      ),
+
+      // Sides
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Sides'),
+        React.createElement('div', { className: 'flex gap-2' },
+          ['1', '2'].map(side => 
+            React.createElement('button', {
+              key: side,
+              onClick: () => handleInputChange('sides', side),
+              className: `toggle-btn ${formData.sides === side ? 'active' : ''}`
+            }, side)
+          )
+        )
+      ),
+
+      // Cut Out Material
+      React.createElement('div', { className: 'form-group' },
+        React.createElement('label', null, 'Cut Out Material'),
+        React.createElement('div', { className: 'toggle-group' },
+          database.cutOutMaterials.map(material => 
+            React.createElement('button', {
+              key: material,
+              onClick: () => handleInputChange('cutOutMaterial', material),
+              className: `toggle-btn ${formData.cutOutMaterial === material ? 'active' : ''}`
+            }, material)
+          )
+        )
+      ),
+
+      // Empty Hole Checkbox
+      React.createElement('div', { className: 'checkbox-group' },
+        React.createElement('input', {
+          type: 'checkbox',
+          id: 'isEmpty',
+          checked: formData.isEmpty,
+          onChange: (e) => handleInputChange('isEmpty', e.target.checked),
+          className: 'checkbox'
+        }),
+        React.createElement('label', {
+          htmlFor: 'isEmpty',
+          className: 'text-base font-medium cursor-pointer flex-1'
+        }, 'Hole is empty')
+      ),
+
       // Action Buttons
       React.createElement('div', { className: 'flex gap-3 mt-4' },
         React.createElement('button', {
