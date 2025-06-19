@@ -1,5 +1,47 @@
 function addRoundPipeLine() {
-    console.log('addRoundPipeLine called'); // Debug log
+    console.log('addRoundPipeLine called'); // Hole shape selection
+function selectHoleShape(shape) {
+    console.log('Selecting hole shape:', shape);
+    
+    const roundBtn = document.querySelector('[data-shape="round"]');
+    const squareBtn = document.querySelector('[data-shape="square"]');
+    const roundInputs = document.getElementById('roundHoleInputs');
+    const squareInputs = document.getElementById('squareHoleInputs');
+    
+    if (roundBtn && squareBtn && roundInputs && squareInputs) {
+        // Update button states
+        roundBtn.classList.remove('active');
+        squareBtn.classList.remove('active');
+        
+        if (shape === 'round') {
+            roundBtn.classList.add('active');
+            roundInputs.classList.add('active');
+            squareInputs.classList.remove('active');
+            
+            // Clear square values
+            const widthEl = document.getElementById('holeWidth');
+            const heightEl = document.getElementById('holeHeight');
+            if (widthEl) widthEl.value = '';
+            if (heightEl) heightEl.value = '';
+            formData.holeWidth = '';
+            formData.holeHeight = '';
+        } else {
+            squareBtn.classList.add('active');
+            squareInputs.classList.add('active');
+            roundInputs.classList.remove('active');
+            
+            // Clear round values
+            const roundSizeEl = document.getElementById('roundHoleSize');
+            if (roundSizeEl) roundSizeEl.value = '';
+            formData.holeSize = '';
+        }
+        
+        formData.holeShape = shape;
+        console.log('Hole shape updated to:', shape);
+    } else {
+        console.log('Hole shape elements not found');
+    }
+} Debug log
     roundPipeCounter++;
     const container = document.getElementById('roundPipeLines');
     const newLine = document.createElement('function addRoundPipeLine() {
