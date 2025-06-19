@@ -35,6 +35,18 @@ const translations = {
             time: {
                 title: "Timeregistering",
                 desc: "Registrer arbeidstimer og prosjektaktiviteter"
+            },
+            checklists: {
+                title: "Checklists",
+                desc: "Sjekklister for kvalitetskontroll og oppfølging"
+            },
+            sja: {
+                title: "SJA",
+                desc: "Sikker Jobb Analyse - risikovurdering og sikkerhetstiltak"
+            },
+            ruh: {
+                title: "RUH",
+                desc: "Rapportering av Uønskede Hendelser"
             }
         }
     },
@@ -73,6 +85,18 @@ const translations = {
             time: {
                 title: "Time Registration",
                 desc: "Register work hours and project activities"
+            },
+            checklists: {
+                title: "Checklists",
+                desc: "Quality control and follow-up checklists"
+            },
+            sja: {
+                title: "JSA",
+                desc: "Job Safety Analysis - risk assessment and safety measures"
+            },
+            ruh: {
+                title: "Incident Reports",
+                desc: "Reporting of Unwanted Events"
             }
         }
     },
@@ -111,6 +135,18 @@ const translations = {
             time: {
                 title: "Evidencija Vremena",
                 desc: "Registriraj radne sate i projektne aktivnosti"
+            },
+            checklists: {
+                title: "Kontrolne Liste",
+                desc: "Kontrolne liste za kvalitetu i praćenje"
+            },
+            sja: {
+                title: "SJA",
+                desc: "Sigurna Analiza Posla - procjena rizika i sigurnosne mjere"
+            },
+            ruh: {
+                title: "Izvještaji o Incidentima",
+                desc: "Prijavljivanje Neželjenih Događaja"
             }
         }
     },
@@ -149,6 +185,18 @@ const translations = {
             time: {
                 title: "Rejestracja Czasu",
                 desc: "Rejestruj godziny pracy i działania projektowe"
+            },
+            checklists: {
+                title: "Listy Kontrolne",
+                desc: "Listy kontrolne jakości i monitorowania"
+            },
+            sja: {
+                title: "SJA",
+                desc: "Analiza Bezpiecznej Pracy - ocena ryzyka i środki bezpieczeństwa"
+            },
+            ruh: {
+                title: "Raporty Incydentów",
+                desc: "Zgłaszanie Niepożądanych Zdarzeń"
             }
         }
     },
@@ -187,6 +235,18 @@ const translations = {
             time: {
                 title: "Înregistrarea Timpului",
                 desc: "Înregistrează orele de lucru și activitățile proiectului"
+            },
+            checklists: {
+                title: "Liste de Verificare",
+                desc: "Liste de verificare pentru controlul calității și monitorizare"
+            },
+            sja: {
+                title: "SJA",
+                desc: "Analiza Siguranței Locului de Muncă - evaluarea riscurilor și măsurile de siguranță"
+            },
+            ruh: {
+                title: "Rapoarte de Incidente",
+                desc: "Raportarea Evenimentelor Nedorite"
             }
         }
     },
@@ -225,6 +285,18 @@ const translations = {
             time: {
                 title: "Laiko Registravimas",
                 desc: "Registruokite darbo valandas ir projekto veiklas"
+            },
+            checklists: {
+                title: "Kontrolės Sąrašai",
+                desc: "Kokybės kontrolės ir stebėjimo kontrolės sąrašai"
+            },
+            sja: {
+                title: "SJA",
+                desc: "Saugaus Darbo Analizė - rizikos vertinimas ir saugumo priemonės"
+            },
+            ruh: {
+                title: "Incidentų Ataskaitos",
+                desc: "Nepageidaujamų Įvykių Pranešimas"
             }
         }
     }
@@ -248,7 +320,7 @@ function changeLanguage(lang) {
     
     // Update menu items
     const menuItems = document.querySelectorAll('.menu-item');
-    const menuKeys = ['create', 'view', 'drawings', 'instructions', 'safety', 'time'];
+    const menuKeys = ['create', 'view', 'drawings', 'instructions', 'safety', 'time', 'checklists', 'sja', 'ruh'];
     
     menuItems.forEach((item, index) => {
         const key = menuKeys[index];
