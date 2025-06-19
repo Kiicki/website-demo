@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skriv Arbeidsliste - Damsgård Brannsikring AS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="skriv-arbeidsliste.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="status-indicator"></div>
+            <div class="user-info">
+                <span class="user-email">👤 igor@d-brann.no</span>
+                <button class="logout-btn" onclick="logout()">Logg ut</button>
+            </div>
+            <div class="nav-buttons">
+                <select class="language-selector" onchange="changeLanguage(this.value)">
+                    <option value="no">🇳🇴 Norsk</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="hr">🇭🇷 Hrvatski</option>
+                    <option value="pl">🇵🇱 Polski</option>
+                    <option value="ro">🇷🇴 Română</option>
+                    <option value="lt">🇱🇹 Lietuvių</option>
+                </select>
+                <button class="home-btn" onclick="goHome()">🏠 <span class="home-text">Hjem</span></button>
+            </div>
+            <h1>🔥 Damsgård Brannsikring AS</h1>
+            <p class="page-subtitle">Skriv Arbeidsliste</p>
+        </header>
+
+        <main class="form-content">
+            <!-- Quick Actions Bar -->
+            <div class="quick-actions">
+                <button class="action-btn" onclick="toggleWorkLists()">
+                    <span class="btn-icon">📋</span>
+                    <span class="btn-text">Se Arbeidslister</span>
+                </button>
+                <button class="action-btn" onclick="toggleAdminTools()">
+                    <span class="btn-icon">⚙️</span>
+                    <span class="btn-text">Admin</span>
+                </button>
+                <button class="action-btn" onclick="toggleDarkMode()">
+                    <span class="btn-icon" id="darkModeIcon">🌙</span>
+                    <span class="btn-text">Mørk Modus</span>
+                </button>
+            </div>
+
+            <!-- Admin Tools Panel -->
+            <div id="adminPanel" class="admin-panel hidden">
+                <h3>Admin Verktøy</h3>
+                <div class="admin-grid">
+                    <div class="admin-item">
+                        <label>Legg til Prosjekt</label>
+                        <div class="input-group">
+                            <input type="text" id="newProject" placeholder="Nytt prosjekt">
+                            <button onclick="addProject()">Legg til</button>
+                        </div>
+                    </div>
+                    <div class="admin-item">
+                        <label>Legg til Etasje</label>
+                        <div class="input-group">
+                            <input type="text" id="newFloor" placeholder="Ny etasje">
+                            <button onclick="addFloor()">Legg til</button>
+                        </div>
+                    </div>
+                    <div class="admin-item">
+                        <label>Legg til Produkt</label>
+                        <div class="input-group">
+                            <input type="text" id="newProduct" placeholder="Nytt produkt">
+                            <button onclick="addProduct()">Legg til</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Lists View -->
+            <div id="workListsView" class="work-lists-view hidden">
+                <div class="work-lists-header">
+                    <h3>Lagrede Arbeidslister (<span id="entryCount">0</span>)</h3>
+                    <button onclick="toggleWorkLists()" class="close-btn">Tilbake til Skjema</button>
+                </div>
+                <div id="workListsContent" class="work-lists-content">
+                    <p class="no-entries">Ingen oppføringer lagret ennå</p>
+                </div>
+            </div>
+
+            <!-- Main Form -->
+            <div id="mainForm" class="form-container">
+                <form class="fireproofing-form">
+                    <!-- Project Selection -->
+                    <div class="form-group">
+                        <label>Prosjekt</label>
+                        <select id="project" name="project">
+                            <option value="">Velg et prosjekt</option>
+                        </select>
+                    </div>
+
+                    <!-- Date Selection -->
+                    <div class="form-group">
+                        <label>Dato</label>
+                        <input type="date" id="date" name="date">
+                    </div>
+
+                    <!-- Floor Selection -->
+                    <div class="form-group">
+                        <label>Etasje</label>
+                        <div class="button-grid" id="floorButtons">
+                            <!-- Floors will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-group">
+                        <label>Lokasjon</label>
+                        <div class="location-group">
+                            <input type="text" id="location1" placeholder="Rom 1" name="location1">
+                            <button type="button" class="swap-btn" onclick="swapLocations()">🔄</button>
+                            <input type="text" id="location2" placeholder="Rom 2" name="location2">
+                        </div>
+                    </div>
+
+                    <!-- Amount of Holes -->
+                    <div class="form-group">
+                        <label>Antall Hull</label>
+                        <div class="hole-count-group">
+                            <div class="button-grid" id="holeCountButtons">
+                                <!-- Hole count buttons will be populated by JavaScript -->
+                            </div>
+                            <input type="number" id="holeCountOther" placeholder="Annet" class="other-input">
+                        </div>
+                    </div>
+
+                    <!-- Hole Type -->
+                    <div class="form-group">
+                        <label>Hullstørrelse</label>
+                        <div class="hole-type-group">
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="holeType" value="round" checked>
+                                    <span>Rund</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="holeType" value="square">
+                                    <span>Firkant</span>
+                                </label>
+                            </div>
+                            <div id="holeSizeInputs" class="hole-size-inputs">
+                                <select id="holeDiameter" name="holeDiameter">
+                                    <option value="">Velg diameter</option>
+                                </select>
+                                <input type="text" id="holeWidth" placeholder="Bredde" class="hidden">
+                                <input type="text" id="holeHeight" placeholder="Høyde" class="hidden">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wall/Ceiling/Floor -->
+                    <div class="form-group">
+                        <label>W/C/F</label>
+                        <div class="button-group">
+                            <button type="button" class="toggle-btn" data-value="Wall">Vegg</button>
+                            <button type="button" class="toggle-btn" data-value="Ceiling">Tak</button>
+                            <button type="button" class="toggle-btn" data-value="Floor">Gulv</button>
+                        </div>
+                    </div>
+
+                    <!-- Products -->
+                    <div class="form-group">
+                        <label>Produkter</label>
+                        <div class="product-controls">
+                            <button type="button" class="action-btn" onclick="showProductSelector()">
+                                <span class="btn-icon">➕</span>
+                                <span class="btn-text">Legg til</span>
+                            </button>
+                            <button type="button" class="action-btn secondary" onclick="resetProducts()">
+                                <span class="btn-icon">🔄</span>
+                                <span class="btn-text">Tilbakestill</span>
+                            </button>
+                        </div>
+                        <div id="selectedProducts" class="selected-products hidden">
+                            <p>Valgte Produkter:</p>
+                            <div id="productTags" class="product-tags"></div>
+                        </div>
+                    </div>
+
+                    <!-- Fire Resistance -->
+                    <div class="form-group">
+                        <label>Brannmotstand</label>
+                        <div class="button-grid" id="fireResistanceButtons">
+                            <!-- Fire resistance buttons will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Sides -->
+                    <div class="form-group">
+                        <label>Antall Sider</label>
+                        <div class="button-group">
+                            <button type="button" class="toggle-btn" data-value="1">1 Side</button>
+                            <button type="button" class="toggle-btn" data-value="2">2 Sider</button>
+                        </div>
+                    </div>
+
+                    <!-- Cut Out Material -->
+                    <div class="form-group">
+                        <label>Utskjært Materiale</label>
+                        <div class="button-grid" id="cutOutMaterialButtons">
+                            <!-- Cut out material buttons will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Empty Hole Checkbox -->
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="isEmpty" name="isEmpty">
+                                <span class="checkmark"></span>
+                                <span class="checkbox-text">Hull er tomt</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button type="button" class="action-btn">
+                            <span class="btn-icon">📷</span>
+                            <span class="btn-text">Kamera</span>
+                        </button>
+                        <button type="button" class="action-btn">
+                            <span class="btn-icon">📎</span>
+                            <span class="btn-text">Legg ved fil</span>
+                        </button>
+                    </div>
+
+                    <!-- Save Button -->
+                    <button type="button" class="save-btn" onclick="saveEntry()">
+                        <span class="btn-icon">💾</span>
+                        <span class="btn-text">Lagre Oppføring</span>
+                    </button>
+                </form>
+            </div>
+        </main>
+
+        <!-- Product Selector Modal -->
+        <div id="productModal" class="modal hidden">
+            <div class="modal-overlay" onclick="hideProductSelector()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Velg Produkter</h3>
+                    <button class="close-modal" onclick="hideProductSelector()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div id="productCheckboxes" class="product-checkboxes">
+                        <!-- Product checkboxes will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="apply-btn" onclick="hideProductSelector()">Bruk</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 Damsgård Brannsikring AS | Skriv Arbeidsliste</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="skriv-arbeidsliste.js"></script>
+</body>
+</html>
