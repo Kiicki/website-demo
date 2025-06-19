@@ -255,6 +255,33 @@ body {
     box-shadow: 0 20px 40px rgba(85, 163, 255, 0.4);
 }
 
+.menu-item.checklists {
+    background: linear-gradient(135deg, #00cec9, #00b894);
+    box-shadow: 0 10px 30px rgba(0, 206, 201, 0.3);
+}
+
+.menu-item.checklists:hover {
+    box-shadow: 0 20px 40px rgba(0, 206, 201, 0.4);
+}
+
+.menu-item.sja {
+    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+    box-shadow: 0 10px 30px rgba(255, 234, 167, 0.3);
+}
+
+.menu-item.sja:hover {
+    box-shadow: 0 20px 40px rgba(255, 234, 167, 0.4);
+}
+
+.menu-item.ruh {
+    background: linear-gradient(135deg, #fab1a0, #e17055);
+    box-shadow: 0 10px 30px rgba(250, 177, 160, 0.3);
+}
+
+.menu-item.ruh:hover {
+    box-shadow: 0 20px 40px rgba(250, 177, 160, 0.4);
+}
+
 .menu-icon {
     font-size: 3rem;
     margin-bottom: 20px;
