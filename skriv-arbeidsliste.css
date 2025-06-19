@@ -52,26 +52,18 @@
     display: block;
 }
 
-.pipe-lines {
-    margin-bottom: 15px;
-}
-
-.pipe-line {
+/* Headers Row - Line 2 */
+.pipe-headers-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr) 60px;
     gap: 10px;
-    margin-bottom: 8px;
-    align-items: end;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 2px solid #dee2e6;
 }
 
-#squarePipeSection .pipe-line {
+.pipe-headers-row.square {
     grid-template-columns: repeat(5, 1fr) 60px;
-}
-
-.pipe-column {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
 }
 
 .pipe-header {
@@ -80,6 +72,27 @@
     font-size: 0.85rem;
     text-align: center;
     padding: 4px;
+}
+
+.pipe-header-spacer {
+    width: 60px;
+}
+
+/* Input Lines - Line 3+ */
+.pipe-lines {
+    margin-bottom: 15px;
+}
+
+.pipe-input-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 60px;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.pipe-input-row.square {
+    grid-template-columns: repeat(5, 1fr) 60px;
 }
 
 .pipe-input {
@@ -99,9 +112,8 @@
 .pipe-actions {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     height: 38px;
-    margin-top: 22px; /* Account for header height */
 }
 
 .remove-pipe-btn {
@@ -152,28 +164,53 @@
         font-size: 0.8rem;
     }
     
-    .pipe-line {
+    .pipe-headers-row {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
     
-    #squarePipeSection .pipe-line {
+    .pipe-headers-row.square {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pipe-input-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding-bottom: 40px;
+        position: relative;
+    }
+    
+    .pipe-input-row.square {
         grid-template-columns: repeat(2, 1fr);
     }
     
     .pipe-actions {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
         grid-column: 1 / -1;
-        margin-top: 10px;
-        justify-content: center;
+    }
+    
+    .pipe-header-spacer {
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
-    .pipe-line {
+    .pipe-headers-row {
         grid-template-columns: 1fr;
     }
     
-    #squarePipeSection .pipe-line {
+    .pipe-headers-row.square {
+        grid-template-columns: 1fr;
+    }
+    
+    .pipe-input-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .pipe-input-row.square {
         grid-template-columns: 1fr;
     }
     
