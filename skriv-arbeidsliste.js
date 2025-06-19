@@ -1,4 +1,27 @@
-// Skriv Arbeidsliste JavaScript
+function addRoundPipeLine() {
+    roundPipeCounter++;
+    const container = document.getElementById('roundPipeLines');
+    const newLine = document.createElement('div');
+    newLine.className = 'pipe-line';
+    newLine.setAttribute('data-pipe-id', roundPipeCounter);
+    
+    newLine.innerHTML = `
+        <div class="pipe-column">
+            <div class="pipe-header">Pipe Type</div>
+            <select class="pipe-input" data-field="type">
+                <option value="">Select pipe type</option>
+                <option value="Steel">Steel</option>
+                <option value="Copper">Copper</option>
+                <option value="PVC">PVC</option>
+                <option value="Cast Iron">Cast Iron</option>
+                <option value="PEX">PEX</option>
+            </select>
+        </div>
+        <div class="pipe-column">
+            <div class="pipe-header">Pipe Size</div>
+            <select class="pipe-input" data-field="size">
+                <option value="">Select size</option>
+                // Skriv Arbeidsliste JavaScript
 
 // Database configuration
 const database = {
