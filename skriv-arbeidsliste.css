@@ -115,7 +115,130 @@
     margin-top: 5px;
 }
 
-/* Amount of holes */
+/* Number Selection Styles */
+.number-selection {
+    width: 100%;
+}
+
+.number-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.number-btn {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    min-width: 45px;
+    box-shadow: 0 3px 10px rgba(116, 185, 255, 0.3);
+}
+
+.number-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+.number-btn.active {
+    background: linear-gradient(135deg, #00b894, #00a085);
+    box-shadow: 0 3px 10px rgba(0, 184, 148, 0.4);
+}
+
+.number-btn.other-btn {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+}
+
+.number-btn.other-btn:hover {
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+}
+
+.number-btn.other-btn.active {
+    background: linear-gradient(135deg, #e17055, #d63031);
+    box-shadow: 0 3px 10px rgba(225, 112, 85, 0.4);
+}
+
+.custom-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #74b9ff;
+}
+
+/* Square hole inputs */
+.square-inputs {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+
+.dimension-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dimension-input label {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.dimension-input input {
+    width: 100px;
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.dimension-separator {
+    font-weight: bold;
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .number-options {
+        gap: 6px;
+    }
+    
+    .number-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        min-width: 40px;
+    }
+    
+    .square-inputs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .dimension-input input {
+        width: 100%;
+    }
+    
+    .dimension-separator {
+        text-align: center;
+        margin: 5px 0;
+    }
+}
 .amount-holes-container {
     display: flex;
     gap: 10px;
