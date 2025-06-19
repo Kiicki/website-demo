@@ -350,7 +350,14 @@ function goHome() {
 
 function navigateTo(section) {
     const t = translations[currentLanguage];
-    // Simulate navigation with visual feedback
+    
+    // Handle navigation to specific pages
+    if (section === 'create-worklist') {
+        window.location.href = 'skriv-arbeidsliste.html';
+        return;
+    }
+    
+    // Simulate navigation with visual feedback for other sections
     const clickedItem = event.currentTarget;
     clickedItem.style.transform = 'scale(0.95)';
     
