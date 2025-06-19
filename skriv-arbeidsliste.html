@@ -450,5 +450,47 @@
 
     <script src="script.js"></script>
     <script src="skriv-arbeidsliste.js"></script>
+<script>
+// Set today's date when page loads
+window.addEventListener('load', function() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    
+    document.getElementById('date').value = formattedDate;
+    console.log('Date set to:', formattedDate);
+});
+
+// Fix hole shape switching
+function selectHoleShape(shape) {
+    const roundBtn = document.querySelector('[data-shape="round"]');
+    const squareBtn = document.querySelector('[data-shape="square"]');
+    const roundInputs = document.getElementById('roundHoleInputs');
+    const squareInputs = document.getElementById('squareHoleInputs');
+    
+    if (shape === 'round') {
+        roundBtn.classList.add('active');
+        squareBtn.classList.remove('active');
+        roundInputs.classList.add('active');
+        squareInputs.classList.remove('active');
+    } else {
+        squareBtn.classList.add('active');
+        roundBtn.classList.remove('active');
+        squareInputs.classList.add('active');
+        roundInputs.classList.remove('active');
+    }
+}
+
+// Fix location swap
+function swapLocations() {
+    const loc1 = document.getElementById('location1');
+    const loc2 = document.getElementById('location2');
+    const temp = loc1.value;
+    loc1.value = loc2.value;
+    loc2.value = temp;
+}
+</script>
 </body>
 </html>
