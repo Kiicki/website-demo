@@ -16,13 +16,10 @@
     background: linear-gradient(135deg, #a29bfe, #6c5ce7);
     border: none;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 20px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
     font-size: 0.9rem;
     font-weight: 500;
     box-shadow: 0 5px 15px rgba(162, 155, 254, 0.3);
@@ -55,35 +52,52 @@
     display: block;
 }
 
-.pipe-form-container {
-    width: 100%;
-}
-
-.pipe-inputs {
-    margin-bottom: 20px;
-}
-
-.pipe-input-row {
+.pipe-headers {
     display: grid;
-    grid-template-columns: repeat(5, 1fr) auto;
+    grid-template-columns: repeat(4, 1fr) 60px;
     gap: 10px;
-    align-items: end;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dee2e6;
 }
 
-.pipe-input-group {
-    display: flex;
-    flex-direction: column;
+.pipe-headers.square {
+    grid-template-columns: repeat(5, 1fr) 60px;
 }
 
-.pipe-input-group label {
-    margin-bottom: 5px;
-    font-size: 0.85rem;
+#squarePipeSection .pipe-headers {
+    grid-template-columns: repeat(5, 1fr) 60px;
+}
+
+.pipe-header {
     font-weight: 600;
     color: #2d3436;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 8px;
 }
 
-.pipe-input-group select,
-.pipe-input-group input {
+.pipe-header-spacer {
+    width: 60px;
+}
+
+.pipe-lines {
+    margin-bottom: 15px;
+}
+
+.pipe-line {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 60px;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+#squarePipeSection .pipe-line {
+    grid-template-columns: repeat(5, 1fr) 60px;
+}
+
+.pipe-input {
     padding: 8px 10px;
     border: 2px solid #ddd;
     border-radius: 8px;
@@ -92,90 +106,23 @@
     background: white;
 }
 
-.pipe-input-group select:focus,
-.pipe-input-group input:focus {
+.pipe-input:focus {
     outline: none;
     border-color: #74b9ff;
 }
 
-.add-pipe-btn {
-    background: linear-gradient(135deg, #00b894, #00a085);
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.pipe-actions {
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 38px;
-    box-shadow: 0 3px 10px rgba(0, 184, 148, 0.3);
-}
-
-.add-pipe-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
-}
-
-.pipes-list {
-    margin-top: 20px;
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-.pipes-list-title {
-    font-weight: 600;
-    color: #2d3436;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
-
-.pipes-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.pipe-item {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) auto;
-    gap: 15px;
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 6px;
     align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-.pipe-item:hover {
-    background: #e9ecef;
-}
-
-.pipe-detail {
-    display: flex;
-    flex-direction: column;
-}
-
-.pipe-detail-label {
-    font-size: 0.75rem;
-    color: #6c757d;
-    margin-bottom: 2px;
-}
-
-.pipe-detail-value {
-    font-size: 0.85rem;
-    color: #2d3436;
-    font-weight: 500;
+    height: 38px;
 }
 
 .remove-pipe-btn {
     background: linear-gradient(135deg, #ff7675, #d63031);
     border: none;
     color: white;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -188,6 +135,25 @@
     box-shadow: 0 5px 15px rgba(255, 118, 117, 0.4);
 }
 
+.add-pipe-line-btn {
+    background: linear-gradient(135deg, #00b894, #00a085);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+    width: fit-content;
+}
+
+.add-pipe-line-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+}
+
 /* Responsive Pipes Section */
 @media (max-width: 768px) {
     .pipe-tabs {
@@ -195,32 +161,64 @@
     }
     
     .pipe-tab-btn {
-        padding: 8px 12px;
+        padding: 10px 15px;
         font-size: 0.8rem;
     }
     
-    .pipe-input-row {
+    .pipe-headers {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
     
-    .add-pipe-btn {
-        grid-column: 1 / -1;
-        margin-top: 10px;
-    }
-    
-    .pipe-item {
+    #squarePipeSection .pipe-headers {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
     }
     
-    .remove-pipe-btn {
+    .pipe-line {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding-bottom: 40px;
+        position: relative;
+    }
+    
+    #squarePipeSection .pipe-line {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pipe-actions {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
         grid-column: 1 / -1;
-        margin-top: 8px;
+    }
+    
+    .pipe-header-spacer {
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
+    .pipe-headers {
+        grid-template-columns: 1fr;
+    }
+    
+    #squarePipeSection .pipe-headers {
+        grid-template-columns: 1fr;
+    }
+    
+    .pipe-line {
+        grid-template-columns: 1fr;
+    }
+    
+    #squarePipeSection .pipe-line {
+        grid-template-columns: 1fr;
+    }
+    
+    .add-pipe-line-btn {
+        width: 100%;
+    }
+}480px) {
     .pipe-input-row {
         grid-template-columns: 1fr;
     }
