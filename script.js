@@ -304,36 +304,6 @@ const translations = {
 
 let currentLanguage = 'no';
 
-function toggleLanguageDropdown() {
-    const dropdown = document.getElementById('languageDropdown');
-    const arrow = document.querySelector('.dropdown-arrow');
-    
-    dropdown.classList.toggle('show');
-    arrow.style.transform = dropdown.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-}
-
-function selectLanguage(langCode, flag, langName) {
-    // Update the selected language display
-    document.querySelector('.selected-language .flag').textContent = flag;
-    document.querySelector('.selected-language .lang-text').textContent = langName;
-    
-    // Close the dropdown
-    document.getElementById('languageDropdown').classList.remove('show');
-    document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
-    
-    // Change the language
-    changeLanguage(langCode);
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-    const selector = document.querySelector('.custom-language-selector');
-    if (!selector.contains(event.target)) {
-        document.getElementById('languageDropdown').classList.remove('show');
-        document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
-    }
-});
-
 function changeLanguage(lang) {
     currentLanguage = lang;
     const t = translations[lang];
