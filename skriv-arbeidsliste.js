@@ -36,8 +36,8 @@ let formData = {
     sides: '1',
     cutOutMaterial: '',
     isEmpty: false,
-    roundPipes: [],
-    squarePipes: []
+    roundPipeLines: [],
+    squarePipeLines: []
 };
 
 // UI state
@@ -116,6 +116,9 @@ function setupEventListeners() {
 }
 
 // Pipe functionality
+let roundPipeCounter = 1;
+let squarePipeCounter = 1;
+
 function switchPipeTab(tabType) {
     const roundSection = document.getElementById('roundPipeSection');
     const squareSection = document.getElementById('squarePipeSection');
@@ -134,159 +137,143 @@ function switchPipeTab(tabType) {
     }
 }
 
-function addRoundPipe() {
-    const type = document.getElementById('roundPipeType').value;
-    const size = document.getElementById('roundPipeSize').value;
-    const quantity = document.getElementById('roundPipeQuantity').value;
-    const rorstruper = document.getElementById('roundPipeRorstruper').value;
+function addRoundPipeLine() {
+    roundPipeCounter++;
+    const container = document.getElementById('roundPipeLines');
+    const newLine = document.createElement('div');
+    newLine.className = 'pipe-line';
+    newLine.setAttribute('data-pipe-id', roundPipeCounter);
     
-    if (!type || !size || !quantity || !rorstruper) {
-        alert('Vennligst fyll ut alle felt for rundt rør');
-        return;
-    }
+    newLine.innerHTML = `
+        <select class="pipe-input" data-field="type">
+            <option value="">Select pipe type</option>
+            <option value="Steel">Steel</option>
+            <option value="Copper">Copper</option>
+            <option value="PVC">PVC</option>
+            <option value="Cast Iron">Cast Iron</option>
+            <option value="PEX">PEX</option>
+        </select>
+        <select class="pipe-input" data-field="size">
+            <option value="">Select size</option>
+            <option value="15mm">15mm</option>
+            <option value="22mm">22mm</option>
+            <option value="28mm">28mm</option>
+            <option value="35mm">35mm</option>
+            <option value="42mm">42mm</option>
+            <option value="54mm">54mm</option>
+            <option value="76mm">76mm</option>
+            <option value="108mm">108mm</option>
+        </select>
+        <select class="pipe-input" data-field="quantity">
+            <option value="">Select quantity</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <select class="pipe-input" data-field="rorstruper">
+            <option value="">Select rørstruper</option>
+            ${Array.from({length: 20}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('')}
+        </select>
+        <div class="pipe-actions">
+            <button type="button" class="remove-pipe-btn" onclick="removePipeLine(this)">Remove</button>
+        </div>
+    `;
     
-    const pipe = {
-        id: Date.now(),
-        type: type,
-        size: size,
-        quantity: quantity,
-        rorstruper: rorstruper
-    };
-    
-    formData.roundPipes.push(pipe);
-    updateRoundPipesList();
-    clearRoundPipeInputs();
+    container.appendChild(newLine);
 }
 
-function addSquarePipe() {
-    const type = document.getElementById('squarePipeType').value;
-    const width = document.getElementById('squarePipeWidth').value;
-    const height = document.getElementById('squarePipeHeight').value;
-    const quantity = document.getElementById('squarePipeQuantity').value;
-    const rorstruper = document.getElementById('squarePipeRorstruper').value;
+function addSquarePipeLine() {
+    squarePipeCounter++;
+    const container = document.getElementById('squarePipeLines');
+    const newLine = document.createElement('div');
+    newLine.className = 'pipe-line';
+    newLine.setAttribute('data-pipe-id', squarePipeCounter);
     
-    if (!type || !width || !height || !quantity || !rorstruper) {
-        alert('Vennligst fyll ut alle felt for firkantede rør');
-        return;
-    }
+    newLine.innerHTML = `
+        <select class="pipe-input" data-field="type">
+            <option value="">Select pipe type</option>
+            <option value="Steel">Steel</option>
+            <option value="Aluminum">Aluminum</option>
+            <option value="Galvanized">Galvanized</option>
+            <option value="Stainless Steel">Stainless Steel</option>
+        </select>
+        <input type="number" class="pipe-input" data-field="width" placeholder="Width (mm)">
+        <input type="number" class="pipe-input" data-field="height" placeholder="Height (mm)">
+        <select class="pipe-input" data-field="quantity">
+            <option value="">Select quantity</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <select class="pipe-input" data-field="rorstruper">
+            <option value="">Select rørstruper</option>
+            ${Array.from({length: 20}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('')}
+        </select>
+        <div class="pipe-actions">
+            <button type="button" class="remove-pipe-btn" onclick="removePipeLine(this)">Remove</button>
+        </div>
+    `;
     
-    const pipe = {
-        id: Date.now(),
-        type: type,
-        width: width,
-        height: height,
-        quantity: quantity,
-        rorstruper: rorstruper
-    };
-    
-    formData.squarePipes.push(pipe);
-    updateSquarePipesList();
-    clearSquarePipeInputs();
+    container.appendChild(newLine);
 }
 
-function removeRoundPipe(id) {
-    formData.roundPipes = formData.roundPipes.filter(pipe => pipe.id !== id);
-    updateRoundPipesList();
+function removePipeLine(button) {
+    const pipeLine = button.closest('.pipe-line');
+    pipeLine.remove();
 }
 
-function removeSquarePipe(id) {
-    formData.squarePipes = formData.squarePipes.filter(pipe => pipe.id !== id);
-    updateSquarePipesList();
-}
-
-function updateRoundPipesList() {
-    const container = document.getElementById('roundPipesContainer');
-    const listDiv = document.getElementById('roundPipesList');
+function collectPipeData() {
+    // Collect round pipe data
+    const roundLines = document.querySelectorAll('#roundPipeLines .pipe-line');
+    formData.roundPipeLines = [];
     
-    if (formData.roundPipes.length === 0) {
-        listDiv.classList.add('hidden');
-        return;
-    }
-    
-    listDiv.classList.remove('hidden');
-    container.innerHTML = '';
-    
-    formData.roundPipes.forEach(pipe => {
-        const pipeDiv = document.createElement('div');
-        pipeDiv.className = 'pipe-item';
-        pipeDiv.innerHTML = `
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Type</span>
-                <span class="pipe-detail-value">${pipe.type}</span>
-            </div>
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Størrelse</span>
-                <span class="pipe-detail-value">${pipe.size}</span>
-            </div>
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Antall</span>
-                <span class="pipe-detail-value">${pipe.quantity}</span>
-            </div>
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Rørstruper</span>
-                <span class="pipe-detail-value">${pipe.rorstruper}</span>
-            </div>
-            <button type="button" class="remove-pipe-btn" onclick="removeRoundPipe(${pipe.id})">
-                Fjern
-            </button>
-        `;
-        container.appendChild(pipeDiv);
+    roundLines.forEach(line => {
+        const inputs = line.querySelectorAll('.pipe-input');
+        const pipeData = {};
+        
+        inputs.forEach(input => {
+            const field = input.getAttribute('data-field');
+            pipeData[field] = input.value;
+        });
+        
+        // Only add if at least one field is filled
+        if (Object.values(pipeData).some(value => value && value.trim() !== '')) {
+            formData.roundPipeLines.push(pipeData);
+        }
     });
-}
-
-function updateSquarePipesList() {
-    const container = document.getElementById('squarePipesContainer');
-    const listDiv = document.getElementById('squarePipesList');
     
-    if (formData.squarePipes.length === 0) {
-        listDiv.classList.add('hidden');
-        return;
-    }
+    // Collect square pipe data
+    const squareLines = document.querySelectorAll('#squarePipeLines .pipe-line');
+    formData.squarePipeLines = [];
     
-    listDiv.classList.remove('hidden');
-    container.innerHTML = '';
-    
-    formData.squarePipes.forEach(pipe => {
-        const pipeDiv = document.createElement('div');
-        pipeDiv.className = 'pipe-item';
-        pipeDiv.innerHTML = `
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Type</span>
-                <span class="pipe-detail-value">${pipe.type}</span>
-            </div>
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Dimensjon</span>
-                <span class="pipe-detail-value">${pipe.width} x ${pipe.height}mm</span>
-            </div>
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Antall</span>
-                <span class="pipe-detail-value">${pipe.quantity}</span>
-            </div>
-            <div class="pipe-detail">
-                <span class="pipe-detail-label">Rørstruper</span>
-                <span class="pipe-detail-value">${pipe.rorstruper}</span>
-            </div>
-            <button type="button" class="remove-pipe-btn" onclick="removeSquarePipe(${pipe.id})">
-                Fjern
-            </button>
-        `;
-        container.appendChild(pipeDiv);
+    squareLines.forEach(line => {
+        const inputs = line.querySelectorAll('.pipe-input');
+        const pipeData = {};
+        
+        inputs.forEach(input => {
+            const field = input.getAttribute('data-field');
+            pipeData[field] = input.value;
+        });
+        
+        // Only add if at least one field is filled
+        if (Object.values(pipeData).some(value => value && value.trim() !== '')) {
+            formData.squarePipeLines.push(pipeData);
+        }
     });
-}
-
-function clearRoundPipeInputs() {
-    document.getElementById('roundPipeType').value = '';
-    document.getElementById('roundPipeSize').value = '';
-    document.getElementById('roundPipeQuantity').value = '';
-    document.getElementById('roundPipeRorstruper').value = '';
-}
-
-function clearSquarePipeInputs() {
-    document.getElementById('squarePipeType').value = '';
-    document.getElementById('squarePipeWidth').value = '';
-    document.getElementById('squarePipeHeight').value = '';
-    document.getElementById('squarePipeQuantity').value = '';
-    document.getElementById('squarePipeRorstruper').value = '';
 }
 
 function populateDropdowns() {
@@ -684,6 +671,9 @@ function toggleDarkMode() {
 
 // Save entry function
 function saveEntry() {
+    // Collect pipe data before saving
+    collectPipeData();
+    
     // Validate required fields
     if (!formData.project) {
         alert('Vennligst velg et prosjekt');
@@ -736,8 +726,8 @@ function resetForm() {
         sides: '1',
         cutOutMaterial: '',
         isEmpty: false,
-        roundPipes: [],
-        squarePipes: []
+        roundPipeLines: [],
+        squarePipeLines: []
     };
     
     // Reset form elements
@@ -767,13 +757,8 @@ function resetForm() {
     // Reset products
     resetProducts();
     
-    // Reset pipes
-    formData.roundPipes = [];
-    formData.squarePipes = [];
-    updateRoundPipesList();
-    updateSquarePipesList();
-    clearRoundPipeInputs();
-    clearSquarePipeInputs();
+    // Reset pipes - clear all pipe lines except the first one
+    resetPipeLines();
 }
 
 // Navigation functions
