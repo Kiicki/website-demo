@@ -1,4 +1,18 @@
 function addRoundPipeLine() {
+    console.log('addRoundPipeLine called'); // Debug log
+    roundPipeCounter++;
+    const container = document.getElementById('roundPipeLines');
+    const newLine = document.createElement('div');
+    newLine.className = 'pipe-input-row';
+    newLine.setAttribute('data-pipe-id', roundPipeCounter);
+    
+    newLine.innerHTML = `
+        <select class="pipe-input" data-field="type">
+            <option value="">Select pipe type</option>
+            <option value="Steel">Steel</option>
+            <option value="Copper">Copper</option>
+            <option value="PVC">PVC</option>
+            <option value="Cast Iron">Cast Ironfunction addRoundPipeLine() {
     roundPipeCounter++;
     const container = document.getElementById('roundPipeLines');
     const newLine = document.createElement('div');
@@ -261,7 +275,7 @@ function removePipeLine(button) {
 
 function collectPipeData() {
     // Collect round pipe data
-    const roundLines = document.querySelectorAll('#roundPipeLines .pipe-line');
+    const roundLines = document.querySelectorAll('#roundPipeLines .pipe-input-row');
     formData.roundPipeLines = [];
     
     roundLines.forEach(line => {
@@ -280,7 +294,7 @@ function collectPipeData() {
     });
     
     // Collect square pipe data
-    const squareLines = document.querySelectorAll('#squarePipeLines .pipe-line');
+    const squareLines = document.querySelectorAll('#squarePipeLines .pipe-input-row');
     formData.squarePipeLines = [];
     
     squareLines.forEach(line => {
