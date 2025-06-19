@@ -450,5 +450,55 @@
 
     <script src="script.js"></script>
     <script src="skriv-arbeidsliste.js"></script>
+<script>
+// Simple test script
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Test script running...');
+    
+    // Set today's date
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
+        console.log('Date set to:', today);
+    } else {
+        console.log('Date input not found');
+    }
+    
+    // Test pipe tab switching
+    window.switchPipeTab = function(tabType) {
+        console.log('Switching to:', tabType);
+        const roundSection = document.getElementById('roundPipeSection');
+        const squareSection = document.getElementById('squarePipeSection');
+        
+        if (roundSection && squareSection) {
+            if (tabType === 'round') {
+                roundSection.style.display = 'block';
+                squareSection.style.display = 'none';
+            } else {
+                roundSection.style.display = 'none';
+                squareSection.style.display = 'block';
+            }
+            console.log('Tab switched successfully');
+        } else {
+            console.log('Pipe sections not found');
+        }
+    };
+    
+    // Test location swap
+    window.swapLocations = function() {
+        const loc1 = document.getElementById('location1');
+        const loc2 = document.getElementById('location2');
+        if (loc1 && loc2) {
+            const temp = loc1.value;
+            loc1.value = loc2.value;
+            loc2.value = temp;
+            console.log('Locations swapped');
+        } else {
+            console.log('Location inputs not found');
+        }
+    };
+});
+</script>
 </body>
 </html>
