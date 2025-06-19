@@ -221,6 +221,188 @@
                         </div>
                     </div>
 
+                    <!-- Pipes Inside Hole Section -->
+                    <div class="form-group">
+                        <label>Rør i Hull</label>
+                        
+                        <!-- Tab Navigation -->
+                        <div class="pipe-tabs">
+                            <button type="button" class="pipe-tab-btn active" onclick="switchPipeTab('round')">
+                                <span class="btn-icon">⭕</span>
+                                <span class="btn-text">Runde Rør</span>
+                            </button>
+                            <button type="button" class="pipe-tab-btn" onclick="switchPipeTab('square')">
+                                <span class="btn-icon">⬜</span>
+                                <span class="btn-text">Firkantede Rør</span>
+                            </button>
+                        </div>
+
+                        <!-- Round Pipes Section -->
+                        <div id="roundPipeSection" class="pipe-section active">
+                            <div class="pipe-form-container">
+                                <div id="roundPipeInputs" class="pipe-inputs">
+                                    <div class="pipe-input-row">
+                                        <div class="pipe-input-group">
+                                            <label>Rørtype</label>
+                                            <select id="roundPipeType">
+                                                <option value="">Velg rørtype</option>
+                                                <option value="Steel">Stål</option>
+                                                <option value="Copper">Kobber</option>
+                                                <option value="PVC">PVC</option>
+                                                <option value="Cast Iron">Støpejern</option>
+                                                <option value="PEX">PEX</option>
+                                            </select>
+                                        </div>
+                                        <div class="pipe-input-group">
+                                            <label>Rørstørrelse</label>
+                                            <select id="roundPipeSize">
+                                                <option value="">Velg størrelse</option>
+                                                <option value="15mm">15mm</option>
+                                                <option value="22mm">22mm</option>
+                                                <option value="28mm">28mm</option>
+                                                <option value="35mm">35mm</option>
+                                                <option value="42mm">42mm</option>
+                                                <option value="54mm">54mm</option>
+                                                <option value="76mm">76mm</option>
+                                                <option value="108mm">108mm</option>
+                                            </select>
+                                        </div>
+                                        <div class="pipe-input-group">
+                                            <label>Antall</label>
+                                            <select id="roundPipeQuantity">
+                                                <option value="">Velg antall</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        </div>
+                                        <div class="pipe-input-group">
+                                            <label>Rørstruper</label>
+                                            <select id="roundPipeRorstruper">
+                                                <option value="">Velg rørstruper</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" class="add-pipe-btn" onclick="addRoundPipe()">
+                                            <span class="btn-icon">➕</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Round Pipes List -->
+                                <div id="roundPipesList" class="pipes-list hidden">
+                                    <p class="pipes-list-title">Runde Rør:</p>
+                                    <div id="roundPipesContainer" class="pipes-container"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Square Pipes Section -->
+                        <div id="squarePipeSection" class="pipe-section">
+                            <div class="pipe-form-container">
+                                <div id="squarePipeInputs" class="pipe-inputs">
+                                    <div class="pipe-input-row">
+                                        <div class="pipe-input-group">
+                                            <label>Rørtype</label>
+                                            <select id="squarePipeType">
+                                                <option value="">Velg rørtype</option>
+                                                <option value="Steel">Stål</option>
+                                                <option value="Aluminum">Aluminium</option>
+                                                <option value="Galvanized">Galvanisert</option>
+                                                <option value="Stainless Steel">Rustfritt stål</option>
+                                            </select>
+                                        </div>
+                                        <div class="pipe-input-group">
+                                            <label>Bredde</label>
+                                            <input type="number" id="squarePipeWidth" placeholder="Bredde (mm)">
+                                        </div>
+                                        <div class="pipe-input-group">
+                                            <label>Høyde</label>
+                                            <input type="number" id="squarePipeHeight" placeholder="Høyde (mm)">
+                                        </div>
+                                        <div class="pipe-input-group">
+                                            <label>Antall</label>
+                                            <select id="squarePipeQuantity">
+                                                <option value="">Velg antall</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        </div>
+                                        <div class="pipe-input-group">
+                                            <label>Rørstruper</label>
+                                            <select id="squarePipeRorstruper">
+                                                <option value="">Velg rørstruper</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" class="add-pipe-btn" onclick="addSquarePipe()">
+                                            <span class="btn-icon">➕</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Square Pipes List -->
+                                <div id="squarePipesList" class="pipes-list hidden">
+                                    <p class="pipes-list-title">Firkantede Rør:</p>
+                                    <div id="squarePipesContainer" class="pipes-container"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Action Buttons -->
                     <div class="action-buttons">
                         <button type="button" class="action-btn">
