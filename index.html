@@ -15,14 +15,39 @@
                 <button class="logout-btn" onclick="logout()">Logg ut</button>
             </div>
             <div class="nav-buttons">
-                <select class="language-selector" onchange="changeLanguage(this.value)">
-                    <option value="no">NO - Norsk</option>
-                    <option value="en">EN - English</option>
-                    <option value="hr">HR - Hrvatski</option>
-                    <option value="pl">PL - Polski</option>
-                    <option value="ro">RO - Română</option>
-                    <option value="lt">LT - Lietuvių</option>
-                </select>
+                <div class="custom-language-selector">
+                    <div class="selected-language" onclick="toggleLanguageDropdown()">
+                        <span class="flag">🇳🇴</span>
+                        <span class="lang-text">Norsk</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <div class="language-option" onclick="selectLanguage('no', '🇳🇴', 'Norsk')">
+                            <span class="flag">🇳🇴</span>
+                            <span class="lang-text">Norsk</span>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('en', '🇬🇧', 'English')">
+                            <span class="flag">🇬🇧</span>
+                            <span class="lang-text">English</span>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('hr', '🇭🇷', 'Hrvatski')">
+                            <span class="flag">🇭🇷</span>
+                            <span class="lang-text">Hrvatski</span>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('pl', '🇵🇱', 'Polski')">
+                            <span class="flag">🇵🇱</span>
+                            <span class="lang-text">Polski</span>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('ro', '🇷🇴', 'Română')">
+                            <span class="flag">🇷🇴</span>
+                            <span class="lang-text">Română</span>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('lt', '🇱🇹', 'Lietuvių')">
+                            <span class="flag">🇱🇹</span>
+                            <span class="lang-text">Lietuvių</span>
+                        </div>
+                    </div>
+                </div>
                 <button class="home-btn" onclick="goHome()">🏠 <span class="home-text">Hjem</span></button>
             </div>
             <h1>🔥 Damsgård Brannsikring AS</h1>
