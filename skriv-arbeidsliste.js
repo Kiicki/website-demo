@@ -2,6 +2,10 @@ function addRoundPipeLine() {
     console.log('addRoundPipeLine called'); // Debug log
     roundPipeCounter++;
     const container = document.getElementById('roundPipeLines');
+    const newLine = document.createElement('function addRoundPipeLine() {
+    console.log('addRoundPipeLine called'); // Debug log
+    roundPipeCounter++;
+    const container = document.getElementById('roundPipeLines');
     const newLine = document.createElement('div');
     newLine.className = 'pipe-input-row';
     newLine.setAttribute('data-pipe-id', roundPipeCounter);
@@ -275,7 +279,7 @@ function removePipeLine(button) {
 
 function collectPipeData() {
     // Collect round pipe data
-    const roundLines = document.querySelectorAll('#roundPipeLines .pipe-input-row');
+    const roundLines = document.querySelectorAll('#roundPipeLines .pipe-line');
     formData.roundPipeLines = [];
     
     roundLines.forEach(line => {
@@ -294,7 +298,7 @@ function collectPipeData() {
     });
     
     // Collect square pipe data
-    const squareLines = document.querySelectorAll('#squarePipeLines .pipe-input-row');
+    const squareLines = document.querySelectorAll('#squarePipeLines .pipe-line');
     formData.squarePipeLines = [];
     
     squareLines.forEach(line => {
