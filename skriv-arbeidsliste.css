@@ -52,8 +52,8 @@
     display: block;
 }
 
-/* Headers Row - Line 2 */
-.pipe-headers-row {
+/* Headers Row */
+.pipe-headers {
     display: grid;
     grid-template-columns: repeat(4, 1fr) 60px;
     gap: 10px;
@@ -62,7 +62,7 @@
     border-bottom: 2px solid #dee2e6;
 }
 
-.pipe-headers-row.square {
+.pipe-headers.square {
     grid-template-columns: repeat(5, 1fr) 60px;
 }
 
@@ -78,12 +78,12 @@
     width: 60px;
 }
 
-/* Input Lines - Line 3+ */
+/* Input Lines */
 .pipe-lines {
     margin-bottom: 15px;
 }
 
-.pipe-input-row {
+.pipe-line {
     display: grid;
     grid-template-columns: repeat(4, 1fr) 60px;
     gap: 10px;
@@ -91,7 +91,7 @@
     align-items: center;
 }
 
-.pipe-input-row.square {
+.pipe-line.square {
     grid-template-columns: repeat(5, 1fr) 60px;
 }
 
@@ -164,23 +164,23 @@
         font-size: 0.8rem;
     }
     
-    .pipe-headers-row {
+    .pipe-headers {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
     
-    .pipe-headers-row.square {
+    .pipe-headers.square {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .pipe-input-row {
+    .pipe-line {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
         padding-bottom: 40px;
         position: relative;
     }
     
-    .pipe-input-row.square {
+    .pipe-line.square {
         grid-template-columns: repeat(2, 1fr);
     }
     
@@ -198,19 +198,19 @@
 }
 
 @media (max-width: 480px) {
-    .pipe-headers-row {
+    .pipe-headers {
         grid-template-columns: 1fr;
     }
     
-    .pipe-headers-row.square {
+    .pipe-headers.square {
         grid-template-columns: 1fr;
     }
     
-    .pipe-input-row {
+    .pipe-line {
         grid-template-columns: 1fr;
     }
     
-    .pipe-input-row.square {
+    .pipe-line.square {
         grid-template-columns: 1fr;
     }
     
