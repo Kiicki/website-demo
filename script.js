@@ -351,21 +351,35 @@ function goHome() {
 function navigateTo(section) {
     const t = translations[currentLanguage];
     
+    // Debug logging
+    console.log('navigateTo called with section:', section);
+    console.log('Current event target:', event?.currentTarget);
+    
     // Handle navigation to specific pages
     if (section === 'create-worklist') {
-        window.location.href = 'skriv-arbeidsliste.html';
+        console.log('Navigating to skriv-arbeidsliste.html');
+        try {
+            window.location.href = 'skriv-arbeidsliste.html';
+        } catch (error) {
+            console.error('Navigation error:', error);
+            alert('Navigation error: ' + error.message);
+        }
         return;
     }
     
     // Simulate navigation with visual feedback for other sections
     const clickedItem = event.currentTarget;
-    clickedItem.style.transform = 'scale(0.95)';
-    
-    setTimeout(() => {
-        clickedItem.style.transform = '';
-        const sectionTitle = clickedItem.querySelector('.menu-title').textContent.toLowerCase();
-        alert(`${t.navigating} ${section}\n\n${t.willImplement} ${sectionTitle}.`);
-    }, 150);
+    if (clickedItem) {
+        clickedItem.style.transform = 'scale(0.95)';
+        
+        setTimeout(() => {
+            clickedItem.style.transform = '';
+            const sectionTitle = clickedItem.querySelector('.menu-title')?.textContent?.toLowerCase() || section;
+            alert(`${t.navigating} ${section}\n\n${t.willImplement} ${sectionTitle}.`);
+        }, 150);
+    } else {
+        alert(`${t.navigating} ${section}`);
+    }
 }
 
 // Add some interactive elements
@@ -380,5 +394,14 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('mouseleave', function() {
             this.style.filter = 'brightness(1)';
         });
+        
+        // Add backup click handler for create-worklist
+        if (item.classList.contains('create')) {
+            item.addEventListener('click', function(e) {
+                console.log('Backup click handler triggered for create-worklist');
+                e.preventDefault();
+                navigateTo('create-worklist');
+            });
+        }
     });
 });
