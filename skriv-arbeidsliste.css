@@ -1,11 +1,192 @@
-/* Additional styles for Skriv Arbeidsliste page */
+/* Pipes Section Styles */
+.pipe-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pipe-tab-btn {
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(162, 155, 254, 0.3);
+}
+
+.pipe-tab-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(162, 155, 254, 0.4);
+}
+
+.pipe-tab-btn.active {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.3);
+}
+
+.pipe-tab-btn.active:hover {
+    box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+}
+
+.pipe-section {
+    display: none;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #74b9ff;
+    margin-top: 15px;
+}
+
+.pipe-section.active {
+    display: block;
+}
+
+.remove-pipe-btn {
+    background: linear-gradient(135deg, #ff7675, #d63031);
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.75rem;
+    box-shadow: 0 2px 6px rgba(255, 118, 117, 0.3);
+}
+
+.remove-pipe-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 118, 117, 0.4);
+}
+
+.add-pipe-line-btn {
+    background: linear-gradient(135deg, #00b894, #00a085);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+    width: fit-content;
+}
+
+.add-pipe-line-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+}
+
+/* Responsive Pipes Table */
+@media (max-width: 768px) {
+    .pipes-table {
+        font-size: 0.8rem;
+    }
+    
+    .pipes-table th,
+    .pipes-table td {
+        padding: 6px 4px;
+    }
+    
+    .pipes-table .pipe-input {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pipes-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .add-pipe-line-btn {
+        width: 100%;
+    }
+}/* Additional styles for Skriv Arbeidsliste page */
 .page-subtitle {
     font-size: 1rem !important;
     opacity: 0.9;
     margin-top: 5px;
 }
 
-/* Pipes Section Styles */
+/* Amount of holes */
+.amount-holes-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.custom-input {
+    width: 120px;
+}
+
+/* Square hole inputs */
+.square-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.square-inputs input {
+    width: 120px;
+}
+
+.dimension-separator {
+    font-weight: bold;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Pipes Table Styles */
+.pipes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+.pipes-table th {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    color: white;
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.pipes-table td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.pipes-table .pipe-input {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    background: white;
+}
+
+.pipes-table .pipe-input:focus {
+    outline: none;
+    border-color: #74b9ff;
+}
+
+.action-cell {
+    width: 80px;
+}
 .pipe-tabs {
     display: flex;
     gap: 10px;
