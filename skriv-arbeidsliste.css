@@ -5,6 +5,239 @@
     margin-top: 5px;
 }
 
+/* Pipes Section Styles */
+.pipe-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pipe-tab-btn {
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(162, 155, 254, 0.3);
+}
+
+.pipe-tab-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(162, 155, 254, 0.4);
+}
+
+.pipe-tab-btn.active {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.3);
+}
+
+.pipe-tab-btn.active:hover {
+    box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+}
+
+.pipe-section {
+    display: none;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #74b9ff;
+    margin-top: 15px;
+}
+
+.pipe-section.active {
+    display: block;
+}
+
+.pipe-form-container {
+    width: 100%;
+}
+
+.pipe-inputs {
+    margin-bottom: 20px;
+}
+
+.pipe-input-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) auto;
+    gap: 10px;
+    align-items: end;
+}
+
+.pipe-input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.pipe-input-group label {
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2d3436;
+}
+
+.pipe-input-group select,
+.pipe-input-group input {
+    padding: 8px 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: border-color 0.3s ease;
+    background: white;
+}
+
+.pipe-input-group select:focus,
+.pipe-input-group input:focus {
+    outline: none;
+    border-color: #74b9ff;
+}
+
+.add-pipe-btn {
+    background: linear-gradient(135deg, #00b894, #00a085);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    box-shadow: 0 3px 10px rgba(0, 184, 148, 0.3);
+}
+
+.add-pipe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+}
+
+.pipes-list {
+    margin-top: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.pipes-list-title {
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.pipes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pipe-item {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.pipe-item:hover {
+    background: #e9ecef;
+}
+
+.pipe-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.pipe-detail-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-bottom: 2px;
+}
+
+.pipe-detail-value {
+    font-size: 0.85rem;
+    color: #2d3436;
+    font-weight: 500;
+}
+
+.remove-pipe-btn {
+    background: linear-gradient(135deg, #ff7675, #d63031);
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    box-shadow: 0 3px 10px rgba(255, 118, 117, 0.3);
+}
+
+.remove-pipe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 118, 117, 0.4);
+}
+
+/* Responsive Pipes Section */
+@media (max-width: 768px) {
+    .pipe-tabs {
+        gap: 8px;
+    }
+    
+    .pipe-tab-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .pipe-input-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .add-pipe-btn {
+        grid-column: 1 / -1;
+        margin-top: 10px;
+    }
+    
+    .pipe-item {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .remove-pipe-btn {
+        grid-column: 1 / -1;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pipe-input-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .pipe-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-text {
+        display: none;
+    }
+    
+    .pipe-tab-btn .btn-icon {
+        font-size: 1.2rem;
+    }
+}
+
 .form-content {
     padding: 30px 40px;
     max-width: 800px;
