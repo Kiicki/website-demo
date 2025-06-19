@@ -35,7 +35,9 @@ let formData = {
     fireResistance: '',
     sides: '1',
     cutOutMaterial: '',
-    isEmpty: false
+    isEmpty: false,
+    roundPipes: [],
+    squarePipes: []
 };
 
 // UI state
@@ -111,6 +113,180 @@ function setupEventListeners() {
     document.getElementById('isEmpty').addEventListener('change', (e) => {
         formData.isEmpty = e.target.checked;
     });
+}
+
+// Pipe functionality
+function switchPipeTab(tabType) {
+    const roundSection = document.getElementById('roundPipeSection');
+    const squareSection = document.getElementById('squarePipeSection');
+    const tabs = document.querySelectorAll('.pipe-tab-btn');
+    
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    if (tabType === 'round') {
+        roundSection.classList.add('active');
+        squareSection.classList.remove('active');
+        tabs[0].classList.add('active');
+    } else {
+        squareSection.classList.add('active');
+        roundSection.classList.remove('active');
+        tabs[1].classList.add('active');
+    }
+}
+
+function addRoundPipe() {
+    const type = document.getElementById('roundPipeType').value;
+    const size = document.getElementById('roundPipeSize').value;
+    const quantity = document.getElementById('roundPipeQuantity').value;
+    const rorstruper = document.getElementById('roundPipeRorstruper').value;
+    
+    if (!type || !size || !quantity || !rorstruper) {
+        alert('Vennligst fyll ut alle felt for rundt rør');
+        return;
+    }
+    
+    const pipe = {
+        id: Date.now(),
+        type: type,
+        size: size,
+        quantity: quantity,
+        rorstruper: rorstruper
+    };
+    
+    formData.roundPipes.push(pipe);
+    updateRoundPipesList();
+    clearRoundPipeInputs();
+}
+
+function addSquarePipe() {
+    const type = document.getElementById('squarePipeType').value;
+    const width = document.getElementById('squarePipeWidth').value;
+    const height = document.getElementById('squarePipeHeight').value;
+    const quantity = document.getElementById('squarePipeQuantity').value;
+    const rorstruper = document.getElementById('squarePipeRorstruper').value;
+    
+    if (!type || !width || !height || !quantity || !rorstruper) {
+        alert('Vennligst fyll ut alle felt for firkantede rør');
+        return;
+    }
+    
+    const pipe = {
+        id: Date.now(),
+        type: type,
+        width: width,
+        height: height,
+        quantity: quantity,
+        rorstruper: rorstruper
+    };
+    
+    formData.squarePipes.push(pipe);
+    updateSquarePipesList();
+    clearSquarePipeInputs();
+}
+
+function removeRoundPipe(id) {
+    formData.roundPipes = formData.roundPipes.filter(pipe => pipe.id !== id);
+    updateRoundPipesList();
+}
+
+function removeSquarePipe(id) {
+    formData.squarePipes = formData.squarePipes.filter(pipe => pipe.id !== id);
+    updateSquarePipesList();
+}
+
+function updateRoundPipesList() {
+    const container = document.getElementById('roundPipesContainer');
+    const listDiv = document.getElementById('roundPipesList');
+    
+    if (formData.roundPipes.length === 0) {
+        listDiv.classList.add('hidden');
+        return;
+    }
+    
+    listDiv.classList.remove('hidden');
+    container.innerHTML = '';
+    
+    formData.roundPipes.forEach(pipe => {
+        const pipeDiv = document.createElement('div');
+        pipeDiv.className = 'pipe-item';
+        pipeDiv.innerHTML = `
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Type</span>
+                <span class="pipe-detail-value">${pipe.type}</span>
+            </div>
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Størrelse</span>
+                <span class="pipe-detail-value">${pipe.size}</span>
+            </div>
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Antall</span>
+                <span class="pipe-detail-value">${pipe.quantity}</span>
+            </div>
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Rørstruper</span>
+                <span class="pipe-detail-value">${pipe.rorstruper}</span>
+            </div>
+            <button type="button" class="remove-pipe-btn" onclick="removeRoundPipe(${pipe.id})">
+                Fjern
+            </button>
+        `;
+        container.appendChild(pipeDiv);
+    });
+}
+
+function updateSquarePipesList() {
+    const container = document.getElementById('squarePipesContainer');
+    const listDiv = document.getElementById('squarePipesList');
+    
+    if (formData.squarePipes.length === 0) {
+        listDiv.classList.add('hidden');
+        return;
+    }
+    
+    listDiv.classList.remove('hidden');
+    container.innerHTML = '';
+    
+    formData.squarePipes.forEach(pipe => {
+        const pipeDiv = document.createElement('div');
+        pipeDiv.className = 'pipe-item';
+        pipeDiv.innerHTML = `
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Type</span>
+                <span class="pipe-detail-value">${pipe.type}</span>
+            </div>
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Dimensjon</span>
+                <span class="pipe-detail-value">${pipe.width} x ${pipe.height}mm</span>
+            </div>
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Antall</span>
+                <span class="pipe-detail-value">${pipe.quantity}</span>
+            </div>
+            <div class="pipe-detail">
+                <span class="pipe-detail-label">Rørstruper</span>
+                <span class="pipe-detail-value">${pipe.rorstruper}</span>
+            </div>
+            <button type="button" class="remove-pipe-btn" onclick="removeSquarePipe(${pipe.id})">
+                Fjern
+            </button>
+        `;
+        container.appendChild(pipeDiv);
+    });
+}
+
+function clearRoundPipeInputs() {
+    document.getElementById('roundPipeType').value = '';
+    document.getElementById('roundPipeSize').value = '';
+    document.getElementById('roundPipeQuantity').value = '';
+    document.getElementById('roundPipeRorstruper').value = '';
+}
+
+function clearSquarePipeInputs() {
+    document.getElementById('squarePipeType').value = '';
+    document.getElementById('squarePipeWidth').value = '';
+    document.getElementById('squarePipeHeight').value = '';
+    document.getElementById('squarePipeQuantity').value = '';
+    document.getElementById('squarePipeRorstruper').value = '';
 }
 
 function populateDropdowns() {
@@ -559,7 +735,9 @@ function resetForm() {
         fireResistance: '',
         sides: '1',
         cutOutMaterial: '',
-        isEmpty: false
+        isEmpty: false,
+        roundPipes: [],
+        squarePipes: []
     };
     
     // Reset form elements
@@ -588,6 +766,14 @@ function resetForm() {
     
     // Reset products
     resetProducts();
+    
+    // Reset pipes
+    formData.roundPipes = [];
+    formData.squarePipes = [];
+    updateRoundPipesList();
+    updateSquarePipesList();
+    clearRoundPipeInputs();
+    clearSquarePipeInputs();
 }
 
 // Navigation functions
