@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damsgård Brannsikring AS - Arbeidslogging</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="status-indicator"></div>
+            <div class="user-info">
+                <span class="user-email">👤 igor@d-brann.no</span>
+                <button class="logout-btn" onclick="logout()">Logg ut</button>
+            </div>
+            <div class="nav-buttons">
+                <select class="language-selector" onchange="changeLanguage(this.value)">
+                    <option value="no">🇳🇴 Norsk</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="hr">🇭🇷 Hrvatski</option>
+                </select>
+                <button class="home-btn" onclick="goHome()">🏠 <span class="home-text">Hjem</span></button>
+            </div>
+            <h1>🔥 Damsgård Brannsikring AS</h1>
+            <p>Arbeidslogging og Dokumenthåndtering</p>
+        </header>
+
+        <main class="main-content">
+            <div class="menu-grid">
+                <div class="menu-item create" onclick="navigateTo('create-worklist')">
+                    <span class="menu-icon">📝</span>
+                    <h3 class="menu-title">Skriv arbeidsliste</h3>
+                    <p class="menu-description">Opprett nye arbeidslister og registrer arbeidsoppgaver for prosjekter</p>
+                </div>
+
+                <div class="menu-item view" onclick="navigateTo('view-worklists')">
+                    <span class="menu-icon">📋</span>
+                    <h3 class="menu-title">Se arbeidslister</h3>
+                    <p class="menu-description">Vis og administrer eksisterende arbeidslister og oppgaver</p>
+                </div>
+
+                <div class="menu-item drawings" onclick="navigateTo('drawings')">
+                    <span class="menu-icon">📐</span>
+                    <h3 class="menu-title">Tegninger</h3>
+                    <p class="menu-description">Tilgang til tekniske tegninger og prosjektdokumentasjon</p>
+                </div>
+
+                <div class="menu-item instructions" onclick="navigateTo('assembly-instructions')">
+                    <span class="menu-icon">🔧</span>
+                    <h3 class="menu-title">Montasjeanvisninger</h3>
+                    <p class="menu-description">Detaljerte instruksjoner for montering og installasjon</p>
+                </div>
+
+                <div class="menu-item safety" onclick="navigateTo('safety-sheets')">
+                    <span class="menu-icon">⚠️</span>
+                    <h3 class="menu-title">Sikkerhertsblad</h3>
+                    <p class="menu-description">Sikkerhetsdatablad og HMS-informasjon for materialer</p>
+                </div>
+
+                <div class="menu-item time" onclick="navigateTo('time-registration')">
+                    <span class="menu-icon">⏰</span>
+                    <h3 class="menu-title">Timeregistering</h3>
+                    <p class="menu-description">Registrer arbeidstimer og prosjektaktiviteter</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="coming-soon-section">
+            <h2 class="coming-soon-text">Coming Soon (2037) 😄</h2>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 Damsgård Brannsikring AS | Utviklet for effektiv arbeidslogging</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
